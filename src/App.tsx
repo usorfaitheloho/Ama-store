@@ -1,35 +1,55 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from "react";
 
-function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+interface Job {
+  id: string;
+  company: string;
+  role: string;
+  status: "Applied" | "Interview" | "Offer" | "Rejected";
 }
 
-export default App
+const jobs: Job[] = [
+  { id: "1", company: "Google", role: "SWE", status: "Applied" },
+  { id: "2", company: "Meta", role: "Frontend Dev", status: "Interview" },
+  { id: "3", company: "Netflix", role: "Backend Eng", status: "Offer" },
+  { id: "4", company: "Amazon", role: "Intern", status: "Rejected" },
+];
+
+const statuses: Job["status"][] = ["Applied", "Interview", "Offer", "Rejected"];
+
+const App: React.FC = () => {
+  return (
+    <div className="min-h-screen bg-gray-100">
+      {/* Navbar */}
+      <nav className="bg-indigo-600 text-white px-6 py-4 flex justify-between items-center">
+        <h1 className="text-xl font-bold">Job Tracker</h1>
+        <button className="bg-white text-indigo-600 px-4 py-2 rounded font-medium hover:bg-gray-200">
+          + Add Job
+        </button>
+      </nav>
+
+      {/* Kanban Board */}
+      <div className="p-6 flex gap-6 overflow-x-auto">
+        {statuses.map((status) => (
+          <div key={status} className="w-1/4 min-w-[250px] bg-white rounded-lg shadow p-4">
+            <h2 className="text-lg font-semibold mb-4">{status}</h2>
+            <div className="space-y-3">
+              {jobs
+                .filter((job) => job.status === status)
+                .map((job) => (
+                  <div
+                    key={job.id}
+                    className="bg-gray-50 border rounded-lg p-3 shadow-sm"
+                  >
+                    <h3 className="font-medium">{job.company}</h3>
+                    <p className="text-sm text-gray-600">{job.role}</p>
+                  </div>
+                ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default App;
