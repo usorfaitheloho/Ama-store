@@ -46,6 +46,12 @@ const MainContent = () => {
     if (maxPrice !== undefined ){
       filteredProducts = filteredProducts.filter( product => product.price <= maxPrice)
     }
+    
+    if (searchQuery){
+      filteredProducts = filteredProducts.filter(product=> product.title.toLowerCase().includes(searchQuery.toLowerCase()) )
+    }
+
+    
   };
 
   const filteredProducts = getFilteredProducts();
