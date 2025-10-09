@@ -12,7 +12,9 @@ const MainContent = () => {
   const itemsPerPage = 12;
 
   useEffect(() => {
-    let url = `https://dummyjson.com/products?limit=${itemsPerPage}&skip=${(currentPage - 1) * itemsPerPage}`
+    let url = `https://dummyjson.com/products?limit=${itemsPerPage}&skip=${
+      (currentPage - 1) * itemsPerPage
+    }`;
     
     if (keyword) {
       url = `https://dummyjson.com/products/search?q=${keyword}`;
@@ -51,10 +53,23 @@ const MainContent = () => {
       filteredProducts = filteredProducts.filter(product=> product.title.toLowerCase().includes(searchQuery.toLowerCase()) )
     }
 
+    switch (filter) {
+      case "expensive" :
+        return filteredProducts.sort((a,b) =>  b.price - a.price)
+      case "cheap" :
+        return filteredProducts.sort((a,b) =>  a.price -b.price)
+      case "popular" :
+        return filteredProducts.sort((a,b) =>  b.rating - a.rating)
+      default:
+        return filteredProducts;
+        
+    }
     
   };
 
   const filteredProducts = getFilteredProducts();
+
+  console.log(filteredProducts);
 
   return (
     <section className="xl:w-[55rem] lg:w-[55rem] sm:w-[40rem] xs:w-[20rem] p-5">
