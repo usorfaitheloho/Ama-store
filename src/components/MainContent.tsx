@@ -39,7 +39,13 @@ const MainContent = () => {
     console.log(filteredProducts)
     }
 
-    if (minPrice )
+    if (minPrice !== undefined ){
+      filteredProducts = filteredProducts.filter( product => product.price >= minPrice)
+    }
+
+    if (maxPrice !== undefined ){
+      filteredProducts = filteredProducts.filter( product => product.price <= maxPrice)
+    }
   };
 
   const filteredProducts = getFilteredProducts();
