@@ -108,7 +108,7 @@ const MainContent = () => {
       <div className="mb-5">
         <div className="flex flex-col items-center justify-between sm:flex-row">
           <div className="relative mt-5 mb-5">
-            <button className="flex items-center px-4 py-2 border rounded-full">
+            <button  onClick={()=> setDropdownOpen(!dropdownOpen) } className="flex items-center px-4 py-2 border rounded-full">
               <Tally3 className="mr-2" />
 
               {filter === "all"
