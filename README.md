@@ -6,9 +6,11 @@ Ama-store is an online storefront application designed to make buying and sellin
 
 - Intuitive product browsing
 - Advanced filtering to help users find what they want
-- Secure user authentication and account management
-- Streamlined checkout process
 - Responsive design for all devices
+
+  ## Screenshot
+
+![Ama-store Screenshot](./src/assets/img/screenshot.png)
 
 ## Technology Stack
 
