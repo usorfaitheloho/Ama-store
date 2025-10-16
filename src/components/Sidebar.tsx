@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import logo from "../assets/icons/ama's logo.png";
 import { useFilter } from "../context/FilterContext";
 
 interface Product {
@@ -10,17 +11,17 @@ interface fetchResponse {
 }
 
 const Sidebar = () => {
-
-  const { searchQuery,
-        setSearchQuery,
-        selectedCategory,
-        setSelectedCategory,
-        minPrice,
-        setMinPrice,
-        maxPrice,
-        setMaxPrice,
-        keyword,
-        setKeyword, } = useFilter()
+  const {
+    searchQuery,
+    setSearchQuery,
+    selectedCategory,
+    setSelectedCategory,
+    minPrice,
+    setMinPrice,
+    maxPrice,
+    setMaxPrice,
+    setKeyword,
+  } = useFilter();
   const [categories, setCategories] = useState<string[]>([]);
   const [keywords] = useState<string[]>([
     "apple",
@@ -49,59 +50,64 @@ const Sidebar = () => {
     fetchCategories();
   }, []);
 
-  const handleMinPriceChange = (e: React.ChangeEvent <HTMLInputElement>)=>{
+  const handleMinPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    setMinPrice(value ? parseFloat(value) : undefined)
-  }
+    setMinPrice(value ? parseFloat(value) : undefined);
+  };
 
-  const handleMaxPriceChange = (e: React.ChangeEvent <HTMLInputElement> ) =>{
+  const handleMaxPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    setMaxPrice(value? parseFloat(value) : undefined);
-  }
+    setMaxPrice(value ? parseFloat(value) : undefined);
+  };
 
-  const handleRadioChangeCategories = (category: string) =>{
-    setSelectedCategory(category)
-  }
+  const handleRadioChangeCategories = (category: string) => {
+    setSelectedCategory(category);
+  };
 
-  const handleKeywordClick = (keyword:string) => {
+  const handleKeywordClick = (keyword: string) => {
     setKeyword(keyword);
-  }; 
-  
-  const handleResetFilter=()=>{
+  };
+
+  const handleResetFilter = () => {
     setSearchQuery("");
     setSelectedCategory("");
     setMaxPrice(undefined);
     setMinPrice(undefined);
     setKeyword("");
-  }
+  };
 
   return (
     <div className="w-64 h-screen p-5">
-      <h1 className="mt-4 mb-10 text-2xl font-bold">React Store</h1>
-
+      <div className="flex items-center mb-6">
+        <img
+          src={logo}
+          alt="Ama's Logo"
+          className="object-contain w-20 h-20 sm:w-28 sm:h-28"
+        />
+      </div>
 
       <section>
         <input
           type="text"
-          className="px-2 border-2 rounded sm:mb-0"
+          className="w-full px-2 py-3 border-2 rounded sm:mb-0"
           placeholder="Search product"
-          value ={searchQuery}
-          onChange={e=>setSearchQuery(e.target.value)}
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
         />
 
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center mt-3">
           <input
             type="text"
             className="w-full px-5 py-3 mb-3 mr-2 border-2"
             placeholder="Min"
-            value ={minPrice ?? ''}
+            value={minPrice ?? ""}
             onChange={handleMinPriceChange}
           />
           <input
             type="text"
             className="w-full px-5 py-3 mb-3 mr-2 border-2"
             placeholder="Max"
-            value = {maxPrice ?? ''}
+            value={maxPrice ?? ""}
             onChange={handleMaxPriceChange}
           />
         </div>
@@ -111,7 +117,6 @@ const Sidebar = () => {
           <h2 className="mb-3 font-semibold text xl">Categories</h2>
         </div>
 
-        
         <section>
           {categories.map((category, index) => (
             <label key={index} className="block mb-2">
@@ -121,13 +126,12 @@ const Sidebar = () => {
                 value={category}
                 onChange={() => handleRadioChangeCategories(category)}
                 className="mr-2 w-[16px] h-[16px]"
-                checked ={selectedCategory === category}
+                checked={selectedCategory === category}
               />
               {category.toUpperCase()}
             </label>
           ))}
         </section>
-
 
         {/* keywords section*/}
         <div className="mt-4 mb-5">
@@ -136,7 +140,7 @@ const Sidebar = () => {
             {keywords.map((keyword, index) => (
               <button
                 key={index}
-                onClick={() => handleKeywordClick(keyword) }
+                onClick={() => handleKeywordClick(keyword)}
                 className="block w-full px-4 py-2 mb-2 text-left border rounded hover:bg-gray-200"
               >
                 {keyword.toUpperCase()}
@@ -145,10 +149,10 @@ const Sidebar = () => {
           </div>
         </div>
 
-        <button 
-        onClick={handleResetFilter}
+        <button
+          onClick={handleResetFilter}
           className="w-full mb-[4rem] py-2 bg-black text-white rounded mt-5 hover:bg-gray-800"
-          >
+        >
           Reset filters
         </button>
       </section>

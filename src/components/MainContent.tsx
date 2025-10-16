@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useTransition } from "react";
+import { useEffect, useState } from "react";
 import { useFilter } from "../context/FilterContext";
 import { Tally3 } from "lucide-react";
 import axios from "axios";
@@ -104,7 +104,7 @@ const MainContent = () => {
   };
   
   return (
-    <section className="xl:w-[55rem] lg:w-[55rem] sm:w-[40rem] xs:w-[20rem] p-5">
+    <section className="xl:w-[55rem] mr-[10rem] lg:w-[55rem] sm:w-[40rem] xs:w-[20rem] p-5">
       <div className="mb-5">
         <div className="flex flex-col items-center justify-between sm:flex-row">
           <div className="relative mt-5 mb-5">
